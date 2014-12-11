@@ -39,7 +39,7 @@ var stream = T.stream('statuses/filter', { track: '#sentibot', language: 'en' })
 stream.on('tweet', function (tweet) {
 	console.log(tweet.text)
 
-	// pusher.trigger('sentibot_channel', 'tweet', {
-	// 	"message": tweet.text
-	// });
+	pusher.trigger('sentibot', 'tweet', {
+  		"message": "hello world"
+	});
 })
