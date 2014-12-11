@@ -37,9 +37,13 @@ var pusher = new Pusher({
 var stream = T.stream('statuses/filter', { track: '#sentibot', language: 'en' })
 
 stream.on('tweet', function (tweet) {
-	console.log(tweet.text)
+	console.log(tweet)
 
 	pusher.trigger('sentibot', 'tweet', {
-  		"message": "hello world"
+  		"message": tweet.text,
+  		"screenname" : tweet.user.screen_name,
+  		"location" : tweet.user.location,
+  		"created" : tweet.created_at,
+  		"profileimage" : tweet.user.profile_image_url
 	});
 })
