@@ -14,6 +14,7 @@ try {
     twitter_consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
     twitter_access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
     twitter_access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+    twitter_tracking_terms : process.env.TWITTER_TRACKING_TERMS
   }
 }
 
@@ -31,10 +32,7 @@ var pusher = new Pusher({
   secret: config.pusher_secret
 });
 
-//
-// filter the public stream by english tweets containing `#sentibot`
-//
-var stream = T.stream('statuses/filter', { track: '#sentibot', language: 'en' })
+var stream = T.stream('statuses/filter', { track: config.twitter_tracking_terms, language: 'en' })
 
 stream.on('tweet', function (tweet) {
 	console.log(tweet)
